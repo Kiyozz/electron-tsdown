@@ -1,72 +1,44 @@
 #!/usr/bin/env node
 
-/*
- * Copyright (c) 2024 Kiyozz.
- *
- * All rights reserved.
- */
+import { cac } from 'cac'
 
-import meow from 'meow'
-import * as fs from 'node:fs/promises'
-import * as path from 'node:path'
-import * as url from 'node:url'
+import { BuildCommand } from './application/BuildCommand.js'
+import { DevCommand } from './application/DevCommand.js'
+import { buildContainer } from './container.js'
+import { BundleError } from './errors/BundleError.js'
+import { ConfigError } from './errors/ConfigError.js'
+import { LaunchError } from './errors/LaunchError.js'
 
-import { Cli, CliFlags } from './cli.js'
-import { commands } from './commands/index.js'
+const cli = cac('electron-esbuild')
+const container = buildContainer()
 
-const getVersion = async (): Promise<string> => {
-  const dirname = path.resolve(url.fileURLToPath(import.meta.url), '..')
-  const pkgPath = path.resolve(dirname, '../package.json')
-  const pkg: { version: string } = JSON.parse(
-    (await fs.readFile(pkgPath)).toString('utf-8'),
-  )
+cli.command('build', 'Build for production').action(async () => {
+  const command = await container.make(BuildCommand)
+  await command.execute()
+  process.exit(0)
+})
 
-  return pkg.version
-}
+cli
+  .command('dev', 'Start development environment')
+  .action(async (_, rawArgs: string[]) => {
+    const command = await container.make(DevCommand)
+    await command.execute(rawArgs ?? [])
+  })
 
-const _cli = meow<CliFlags>(
-  `Usage
-  $ electron-esbuild [command]
+cli.help()
+cli.version('__VERSION__')
 
-Commands
-  dev
-    Runs a development environment
-  build
-    Builds your application preparing for packaging
-
-Examples
-  $ electron-esbuild dev
-  $ electron-esbuild build`,
-  {
-    version: await getVersion(),
-    flags: {
-      clean: {
-        type: 'boolean',
-        default: true,
-      },
-    },
-    allowUnknownFlags: true,
-    importMeta: import.meta,
-  },
-)
-type Commands = keyof typeof commands
-
-const [_command, ...unknownInputs] = _cli.input
-const _availableCommands = ['dev', 'build']
-
-function isValidAction(command?: string): command is Commands {
-  if (typeof command === 'undefined' || !_availableCommands.includes(command)) {
-    _cli.showHelp(0)
+try {
+  cli.parse(process.argv, { run: false })
+  await cli.runMatchedCommand()
+} catch (err) {
+  if (
+    err instanceof ConfigError ||
+    err instanceof BundleError ||
+    err instanceof LaunchError
+  ) {
+    process.stderr.write(err.message + '\n')
+    process.exit(1)
   }
-
-  return true
-}
-
-if (isValidAction(_command)) {
-  const action: Cli = await commands[_command].create(_cli, unknownInputs)
-
-  await action.init()
-  if (_command === 'build') {
-    process.exit(0)
-  }
+  throw err
 }

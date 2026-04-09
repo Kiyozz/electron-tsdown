@@ -1,5 +1,5 @@
-import { Configuration } from './config/validation.js'
+import { AppConfigInput } from './domain/value-objects/AppConfig.js'
 
-export function defineConfig(configuration: Configuration) {
-  return configuration
+export function defineConfig(config: AppConfigInput) {
+  return config
 }
