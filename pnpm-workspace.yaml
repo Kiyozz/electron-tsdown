@@ -7,4 +7,5 @@ ignoredBuiltDependencies:
   - svelte-preprocess
 onlyBuiltDependencies:
   - electron
+  - lefthook
   - tsdown

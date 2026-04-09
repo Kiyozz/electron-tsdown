@@ -8,33 +8,25 @@
     "email": "kevinturmel@gmail.com",
     "url": "https://github.com/Kiyozz"
   },
+  "type": "module",
   "private": true,
   "engines": {
     "node": ">=22",
     "pnpm": "10"
   },
   "scripts": {
-    "prepare": "husky"
+    "fmt": "pnpm -r fmt",
+    "fmt:check": "pnpm -r fmt:check",
+    "lint": "pnpm -r lint",
+    "lint:fix": "pnpm -r lint:fix",
+    "changeset:version": "changeset version"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^7.18.0",
-    "@typescript-eslint/parser": "^7.18.0",
-    "eslint": "^8.57.1",
-    "eslint-config-prettier": "^8.10.2",
-    "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-prettier": "^5.5.5",
-    "husky": "^9.1.7",
-    "lint-staged": "^16.4.0",
-    "prettier": "^3.8.1",
+    "@changesets/cli": "^2.30.0",
+    "lefthook": "^2.1.5",
+    "oxfmt": "^0.44.0",
+    "oxlint": "^1.59.0",
     "typescript": "~6.0.2"
-  },
-  "lint-staged": {
-    "*.{md,json,yml}": [
-      "prettier --write"
-    ],
-    "!(templates|dist)/*.{mts,mjs,ts,js}": [
-      "eslint --fix --max-warnings=0"
-    ]
   },
   "packageManager": "pnpm@10.33.0",
   "volta": {

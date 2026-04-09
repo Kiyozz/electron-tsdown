@@ -19,7 +19,7 @@ const preload = {
   // it is important to use .mjs extension for preload script because of how electron load preload script
   outExtension: {
     '.js': '.mjs',
-  }
+  },
 }
 
 export default [main, preload]

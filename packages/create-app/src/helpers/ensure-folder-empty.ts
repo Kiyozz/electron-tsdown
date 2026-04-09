@@ -45,7 +45,7 @@ export const ensureFolderEmpty = async (
           } else {
             console.log(`  ${file}`)
           }
-        } catch (e) {
+        } catch {
           console.log(`  ${file}`)
         }
       }

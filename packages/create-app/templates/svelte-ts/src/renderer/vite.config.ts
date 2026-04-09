@@ -9,6 +9,6 @@ export default defineConfig({
     target: 'chrome124', // electron version target
   },
   server: {
-    port: 9080
-  }
+    port: 9080,
+  },
 })

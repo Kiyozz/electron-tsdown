@@ -1,14 +1,14 @@
 {
   "name": "electron-esbuild-svelte-typescript",
   "version": "1.0.0",
+  "description": "A simple Electron app built with electron-esbuild",
+  "author": "built by electron-esbuild",
+  "type": "module",
   "scripts": {
     "dev": "electron-esbuild dev",
     "build": "electron-esbuild build",
     "package": "electron-builder"
   },
-  "type": "module",
-  "author": "built by electron-esbuild",
-  "description": "A simple Electron app built with electron-esbuild",
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^3.1.0",
     "@types/node": "^22.15.20",

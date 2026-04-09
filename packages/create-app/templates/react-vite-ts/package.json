@@ -1,14 +1,14 @@
 {
   "name": "react-vite-typescript",
   "version": "1.0.0",
+  "description": "A simple Electron app built with electron-esbuild",
+  "author": "built by electron-esbuild",
+  "type": "module",
   "scripts": {
     "dev": "electron-esbuild dev",
     "build": "electron-esbuild build",
     "package": "electron-builder"
   },
-  "type": "module",
-  "author": "built by electron-esbuild",
-  "description": "A simple Electron app built with electron-esbuild",
   "devDependencies": {
     "@types/node": "^22.15.20",
     "@types/react": "^19.1.4",

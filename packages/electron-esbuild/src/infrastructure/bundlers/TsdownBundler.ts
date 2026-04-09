@@ -82,7 +82,7 @@ export class TsdownBundler implements BundlerInterface {
       outDir,
       config: false,
       deps: {
-        ...(c.deps ?? {}),
+        ...c.deps,
         neverBundle: NEVER_BUNDLE,
       },
     }))

@@ -1,42 +1,41 @@
 {
   "name": "@electron-esbuild/create-app",
   "version": "9.2.0",
-  "keywords": [
-    "electron",
-    "react",
-    "esbuild",
-    "svelte",
-    "cli",
-    "create-app"
-  ],
-  "type": "module",
   "description": "Create Electron esbuild powered apps with one command",
+  "keywords": [
+    "cli",
+    "create-app",
+    "electron",
+    "esbuild",
+    "react",
+    "svelte"
+  ],
+  "license": "MIT",
+  "author": "Kiyozz",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Kiyozz/electron-esbuild.git",
     "directory": "packages/create-app"
   },
-  "author": "Kiyozz",
-  "license": "MIT",
   "bin": {
     "create-app": "./dist/index.js"
-  },
-  "exports": "./dist/index.js",
-  "engines": {
-    "node": ">=22",
-    "pnpm": "10"
-  },
-  "scripts": {
-    "build": "tsc -b && tsdown",
-    "prepublishOnly": "tsc -b && tsdown",
-    "lint": "eslint src --ext mts,mjs,ts,js"
   },
   "files": [
     "dist",
     "templates"
   ],
+  "type": "module",
+  "exports": "./dist/index.js",
   "publishConfig": {
     "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -b && tsdown",
+    "prepublishOnly": "tsc -b && tsdown",
+    "fmt": "oxfmt .",
+    "fmt:check": "oxfmt --check .",
+    "lint": "oxlint src",
+    "lint:fix": "oxlint --fix src"
   },
   "dependencies": {
     "cross-spawn": "^7.0.3",
@@ -50,5 +49,9 @@
     "@types/node": "^22.15.20",
     "tsdown": "^0.21.7",
     "typescript": "~5.8.3"
+  },
+  "engines": {
+    "node": ">=22",
+    "pnpm": "10"
   }
 }
