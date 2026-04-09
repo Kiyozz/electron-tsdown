@@ -12,7 +12,7 @@ import type { Configurator } from './base.configurator.js'
 import type { EnvConfig } from '../config.js'
 import { TypeConfig } from '../enums.js'
 
-export class ViteConfigurator implements Configurator<TypeConfig.vite> {
+export class ViteConfigurator implements Configurator<'vite'> {
   public readonly type = TypeConfig.vite
 
   constructor(public readonly config: EnvConfig) {}
@@ -21,7 +21,7 @@ export class ViteConfigurator implements Configurator<TypeConfig.vite> {
     partial: Partial<InlineConfig>,
     userConfig: InlineConfig,
   ): InlineConfig {
-    let external = partial?.build?.rollupOptions?.external
+    let external = partial?.build?.rolldownOptions?.external
 
     if (!Array.isArray(external)) {
       external = [external as string]

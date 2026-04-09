@@ -4,11 +4,11 @@
  * All rights reserved.
  */
 
-import { BuildOptions } from 'esbuild'
+import { UserConfig } from 'tsdown'
 import { InlineConfig } from 'vite'
 
 import { Configurator } from './configurators/base.configurator.js'
-import { EsbuildConfigurator } from './configurators/esbuild.configurator.js'
+import { TsdownConfigurator } from './configurators/tsdown.configurator.js'
 import { ViteConfigurator } from './configurators/vite.configurator.js'
 import { Target, TypeConfig } from './enums.js'
 import {
@@ -16,63 +16,24 @@ import {
   PossibleConfiguration,
   RendererPossibleConfiguration,
 } from './types.js'
-import { YamlItem } from './yaml.js'
-import { EsbuildBuilder } from '../builder/esbuild.builder.js'
+import { TsdownBuilder } from '../builder/tsdown.builder.js'
 import { ViteBuilder } from '../builder/vite.builder.js'
 import { Builder } from '../builder.js'
 import { unsupportedType } from '../console.js'
+import { Configuration } from './validation.js'
 
-export type EnvOutput = {
-  dir: string
-  filename: string
-}
+export type EnvConfig = MainEnvConfig | NonNullable<Configuration['renderer']>
 
-export class EnvConfig {
-  readonly type: TypeConfig
-  readonly path: string
-  readonly src: string
-  readonly output: EnvOutput
-  readonly html?: string
+export type MainEnvConfig = Configuration['main']
 
-  constructor({
-    type,
-    path,
-    src,
-    output,
-    html,
-  }: {
-    type: TypeConfig
-    path: string
-    src: string
-    output: EnvOutput
-    html?: string
-  }) {
-    this.type = type
-    this.path = path
-    this.src = src
-    this.output = output
-    this.html = html
-  }
-
-  static fromYaml(yaml: YamlItem): EnvConfig {
-    return new this({
-      type: yaml.type,
-      path: yaml.path,
-      src: yaml.src,
-      output: yaml.output,
-      html: yaml.html,
-    })
-  }
-
-  toConfigurator() {
-    switch (this.type) {
-      case TypeConfig.esbuild:
-        return new EsbuildConfigurator(this) as Configurator<TypeConfig>
-      case TypeConfig.vite:
-        return new ViteConfigurator(this) as Configurator<TypeConfig>
-      default:
-        unsupportedType(this.type)
-    }
+export function toConfigurator<E extends EnvConfig>(envConfig: E) {
+  switch (envConfig.type) {
+    case TypeConfig.tsdown:
+      return new TsdownConfigurator(envConfig) as Configurator<TypeConfig, E>
+    case TypeConfig.vite:
+      return new ViteConfigurator(envConfig) as Configurator<TypeConfig, E>
+    default:
+      unsupportedType()
   }
 }
 
@@ -84,7 +45,7 @@ export class ConfigItem<
   readonly fileConfig: F
   readonly target: Target
   readonly isVite: boolean
-  readonly isEsbuild: boolean
+  readonly isTsdown: boolean
   readonly isMain: boolean
   readonly isRenderer: boolean
 
@@ -101,20 +62,20 @@ export class ConfigItem<
     this.fileConfig = fileConfig
     this.target = target
     this.isVite = this.fileConfig?.type === TypeConfig.vite
-    this.isEsbuild = this.fileConfig?.type === TypeConfig.esbuild
+    this.isTsdown = this.fileConfig?.type === TypeConfig.tsdown
     this.isMain = this.target === Target.main
     this.isRenderer = this.target === Target.renderer
   }
 
   async toBuilderAsync(): Promise<Builder | null> {
-    if (this.isEsbuild) {
-      return new EsbuildBuilder(this as ConfigItem<BuildOptions[]>)
+    if (this.isTsdown) {
+      return new TsdownBuilder(this as ConfigItem<UserConfig[]>)
     } else if (this.isVite) {
       return await ViteBuilder.create(this as ConfigItem<InlineConfig>)
     }
 
     if (this.fileConfig !== null) {
-      unsupportedType(this.fileConfig.type, this.isMain ? 'main' : 'renderer')
+      unsupportedType(this.isMain ? 'main' : 'renderer')
     }
 
     return null
@@ -125,14 +86,14 @@ export class Config<
   M extends MainPossibleConfiguration,
   R extends RendererPossibleConfiguration,
 > {
-  readonly main: ConfigItem<M, EnvConfig>
+  readonly main: ConfigItem<M, MainEnvConfig>
   readonly renderer: ConfigItem<R | null>
 
   constructor({
     main,
     renderer,
   }: {
-    main: ConfigItem<M, EnvConfig>
+    main: ConfigItem<M, MainEnvConfig>
     renderer: ConfigItem<R | null>
   }) {
     this.main = main

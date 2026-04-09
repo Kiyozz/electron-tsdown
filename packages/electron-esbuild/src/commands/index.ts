@@ -7,7 +7,7 @@
 import { Build } from './build.js'
 import { Dev } from './dev.js'
 
-export const commands = {
+export const commands: { readonly build: typeof Build; readonly dev: typeof Dev } = {
   build: Build,
   dev: Dev,
 }

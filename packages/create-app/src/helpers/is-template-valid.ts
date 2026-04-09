@@ -8,7 +8,7 @@ import { cyan, red, stripColors, yellow } from 'kolorist'
 
 import { Template } from '../enums/template.js'
 
-export const TEMPLATES = [
+export const TEMPLATES: string[] = [
   yellow(Template.MainOnlyJavaScript),
   yellow(Template.MainOnlyTypeScript),
   cyan(Template.ReactViteJavaScript),

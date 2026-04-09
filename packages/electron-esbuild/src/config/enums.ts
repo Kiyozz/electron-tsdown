@@ -4,10 +4,12 @@
  * All rights reserved.
  */
 
-export enum TypeConfig {
-  esbuild = 'esbuild',
-  vite = 'vite',
-}
+export type TypeConfig = 'tsdown' | 'vite'
+
+export const TypeConfig = {
+  tsdown: 'tsdown',
+  vite: 'vite',
+} satisfies Record<TypeConfig, TypeConfig>
 
 export enum Target {
   main,

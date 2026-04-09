@@ -27,8 +27,8 @@
     "pnpm": "10"
   },
   "scripts": {
-    "build": "ee 'src/**' --module --format esm --sourcemap --clean-outdir --outdir dist --target node16",
-    "prepublishOnly": "ee 'src/**' --module --format esm --sourcemap --clean-outdir --outdir dist --target node16 --check-types --ts-project tsconfig.types.json",
+    "build": "tsc -b && tsdown",
+    "prepublishOnly": "tsc -b && tsdown",
     "lint": "eslint src --ext mts,mjs,ts,js"
   },
   "files": [
@@ -45,10 +45,10 @@
     "minimist": "^1.2.8"
   },
   "devDependencies": {
-    "@electron-esbuild/ee": "workspace:*",
     "@types/cross-spawn": "^6.0.2",
     "@types/minimist": "^1.2.2",
     "@types/node": "^22.15.20",
+    "tsdown": "^0.21.7",
     "typescript": "~5.8.3"
   }
 }

@@ -19,11 +19,12 @@
   "author": "Kiyozz",
   "license": "MIT",
   "bin": {
-    "electron-esbuild": "./dist/index.js"
+    "electron-esbuild": "./dist/run.js"
   },
   "exports": {
     ".": {
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
     }
   },
   "engines": {
@@ -31,39 +32,34 @@
     "pnpm": "10"
   },
   "scripts": {
-    "build": "ee 'src/**' --module --format esm --sourcemap --clean-outdir --outdir dist --target node16",
-    "prepublishOnly": "ee 'src/**' --module --format esm --sourcemap --clean-outdir --outdir dist --target node16 --check-types --ts-project tsconfig.types.json",
+    "build": "tsc -b && tsdown",
+    "prepublishOnly": "tsc -b && tsdown",
     "lint": "eslint src --ext ts,js"
   },
   "files": [
     "dist"
   ],
   "dependencies": {
-    "@sindresorhus/is": "^6.3.0",
-    "chokidar": "^3.5.3",
-    "debounce-fn": "^5.1.2",
+    "@sindresorhus/is": "^7.2.0",
+    "debounce-fn": "^6.0.0",
     "deepmerge": "^4.3.1",
-    "dependency-tree": "^11.0.1",
-    "has": "^1.0.3",
-    "js-yaml": "^4.1.0",
-    "meow": "^12.0.1",
-    "rimraf": "^5.0.1",
-    "zod": "^3.23.8"
+    "dependency-tree": "^11.4.0",
+    "js-yaml": "^4.1.1",
+    "meow": "^14.1.0",
+    "unconfig": "^7.5.0",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@electron-esbuild/ee": "workspace:*",
-    "@types/cross-spawn": "^6.0.2",
-    "@types/has": "^1.0.0",
-    "@types/js-yaml": "^4.0.5",
-    "@types/node": "^18.16.19",
-    "@types/rimraf": "^3.0.2",
-    "esbuild": "^0.25.4",
-    "typescript": "~5.8.3",
-    "vite": "^6.3.5"
+    "@types/has": "^1.0.2",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^24.12.2",
+    "tsdown": "^0.21.7",
+    "typescript": "~6.0.2",
+    "vite": "^8.0.7"
   },
   "peerDependencies": {
-    "esbuild": "0.25.x",
-    "vite": "6.x"
+    "tsdown": "^0.21.7",
+    "vite": "8.x"
   },
   "peerDependenciesMeta": {
     "vite": {

@@ -4,9 +4,6 @@
  * All rights reserved.
  */
 
-import path from 'node:path'
-import { rimraf } from 'rimraf'
-
 import { Cli, CliResult } from '../cli.js'
 import { CONFIG_FILE_NAME } from '../config/constants.js'
 import { Logger } from '../console.js'
@@ -16,7 +13,6 @@ const _logger = new Logger('Commands/Build')
 
 async function clean(): Promise<void> {
   _logger.log('Cleaning')
-  await rimraf(path.resolve('dist'))
 }
 
 export class Build extends Cli {
@@ -38,7 +34,7 @@ export class Build extends Cli {
 
     _logger.debug('Creating worker')
 
-    const worker = Worker.fromFile({
+    const worker = await Worker.fromFileAsync({
       file: CONFIG_FILE_NAME,
       env: 'production',
     })

@@ -4,14 +4,10 @@
  * All rights reserved.
  */
 
-import { TypeConfig } from './config/enums.js'
 import { track } from './track.js'
 
-export function unsupportedType(
-  type: TypeConfig,
-  env?: 'main' | 'renderer',
-): never {
-  const args = [track(), 'unsupported type', type]
+export function unsupportedType(env?: 'main' | 'renderer'): never {
+  const args = [track(), 'unsupported type']
 
   if (env) {
     args.push('for', env)

@@ -2,9 +2,9 @@ packages:
   - packages/create-app
   - packages/ee
   - packages/electron-esbuild
+
 ignoredBuiltDependencies:
   - svelte-preprocess
 onlyBuiltDependencies:
-  - '@swc/core'
   - electron
-  - esbuild
+  - tsdown

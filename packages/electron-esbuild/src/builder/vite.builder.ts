@@ -77,7 +77,7 @@ export class ViteBuilder extends BaseBuilder<InlineConfig> {
 
     if (this._config.isMain) {
       _logger.debug('Vite cannot be used in the main process')
-      unsupportedType(this._config.fileConfig.type, 'main')
+      unsupportedType('main')
     }
 
     _logger.log('Building', this.env.toLowerCase())
@@ -95,7 +95,7 @@ export class ViteBuilder extends BaseBuilder<InlineConfig> {
 
     if (this._config.isMain) {
       _logger.debug('Vite cannot be used in the main process')
-      unsupportedType(this._config.fileConfig.type, 'main')
+      unsupportedType('main')
     }
 
     if (this._config.isRenderer) {

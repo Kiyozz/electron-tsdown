@@ -7,9 +7,6 @@
     </scripts>
     <node-interpreter value="project" />
     <envs />
-    <method v="2">
-      <option name="TypeScript.Before.Run" enabled="true" FAIL_ON_ERROR="true" CONFIG_PATH="$PROJECT_DIR$/packages/create-app/tsconfig.json" />
-      <option name="RunConfigurationTask" enabled="true" run_configuration_name="Packages/ee - build" run_configuration_type="js.build_tools.npm" />
-    </method>
+    <method v="2" />
   </configuration>
 </component>

@@ -126,7 +126,7 @@ export class Dev extends Cli {
 
     _logger.debug('Creating worker')
 
-    const worker = Worker.fromFile({
+    const worker = await Worker.fromFileAsync({
       file: CONFIG_FILE_NAME,
       env: 'development',
     })

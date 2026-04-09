@@ -3,3 +3,5 @@
 
 # WebStorm
 /.idea
+
+.claude/settings.local.json

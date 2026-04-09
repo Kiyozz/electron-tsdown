@@ -4,120 +4,74 @@
  * All rights reserved.
  */
 
-import { buildSync } from 'esbuild'
-import has from 'has'
-import yaml from 'js-yaml'
 import fs from 'node:fs'
-import fsAsync from 'node:fs/promises'
 import path from 'node:path'
+import { loadConfig } from 'unconfig'
 
-import { Config, ConfigItem, EnvConfig } from './config/config.js'
+import {
+  Config,
+  ConfigItem,
+  EnvConfig,
+  MainEnvConfig,
+  toConfigurator,
+} from './config/config.js'
 import { Configurator } from './config/configurators/base.configurator.js'
 import { Target, TypeConfig } from './config/enums.js'
 import {
   ExtractArray,
   MainPossibleConfiguration,
-  PossibleConfiguration,
   RendererPossibleConfiguration,
 } from './config/types.js'
 import { configByEnv } from './config/utils.js'
-import { ConfigFile } from './config/validation.js'
-import { Yaml, YamlSkeleton } from './config/yaml.js'
+import { Configuration, Validator } from './config/validation.js'
 import { Logger } from './console.js'
 import { Env } from './env.js'
 
-const _outMain = 'out_main.mjs'
-const _outRenderer = 'out_renderer.mjs'
 const _logger = new Logger('Config')
 const _cwd = process.cwd()
-const _resolve = (...paths: string[]): string => path.resolve(_cwd, ...paths)
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const _require = async (module: string): Promise<any> => {
-  return await import(`file://${module}`)
-}
-const _silentRemove = async (file: string) => {
-  try {
-    await fsAsync.unlink(file)
-  } catch {
-    // Silent error
-  }
-}
-const _buildUserConfig = async <C extends PossibleConfiguration>(
-  configPath: string,
-  target: Target,
-): Promise<C> => {
-  const outName = target === Target.main ? _outMain : _outRenderer
-  const out = _resolve(outName)
 
-  buildSync({
-    target: 'node20',
-    outfile: out,
-    entryPoints: [configPath],
-    platform: 'node',
-    format: 'esm',
+const _resolve = (...paths: string[]): string => path.resolve(_cwd, ...paths)
+
+/**
+ * @param configPath
+ */
+const _loadUserConfig = async <C>(configPath: string): Promise<C> => {
+  const { config } = await loadConfig<C>({
+    sources: [
+      {
+        files: configPath,
+      },
+    ],
   })
 
   try {
-    let userConfig = await _require(out)
-
-    if (has(userConfig, 'default')) {
-      userConfig = userConfig.default
-    }
-
-    await _silentRemove(out)
-
-    if (target === Target.main && !Array.isArray(userConfig)) {
-      _logger.end(
-        'starting with electron-esbuild 9.0.0 you need to export an array for your esbuild config',
-      )
-    }
-
-    return userConfig as C
+    return config
   } catch (e) {
-    await _silentRemove(out)
-
     _logger.error('electron-esbuild could not load file', configPath)
     _logger.error('below stack:')
     _logger.end(e)
     process.exit(1)
   }
 }
-const _loadYaml = (file: string): Yaml => {
-  let fileContent = ''
-
-  try {
-    fileContent = fs.readFileSync(path.resolve(file)).toString()
-  } catch (e) {
-    _logger.end('Unable to find electron-esbuild config file at:', file)
-  }
-
-  const configFile = new ConfigFile(
-    yaml.load(fileContent) as unknown as YamlSkeleton,
-  )
-
-  configFile.ensureValid()
-
-  return configFile.toYaml()
-}
 
 class _WorkerConfigurator {
-  readonly main: Configurator<TypeConfig>
+  readonly main: Configurator<TypeConfig, MainEnvConfig>
   readonly renderer: Configurator<TypeConfig> | null
 
   constructor({
     main,
     renderer,
   }: {
-    main: Configurator<TypeConfig>
+    main: Configurator<TypeConfig, MainEnvConfig>
     renderer: Configurator<TypeConfig> | null
   }) {
     this.main = main
     this.renderer = renderer
   }
 
-  static fromYaml(yaml: Yaml): _WorkerConfigurator {
-    const main = yaml.main.toConfigurator()
-    const renderer = yaml.renderer ? yaml.renderer.toConfigurator() : null
+  static fromConfig(config: Configuration): _WorkerConfigurator {
+    const main = toConfigurator(config.main)
+    const renderer = config.renderer ? toConfigurator(config.renderer) : null
 
     return new this({ main, renderer })
   }
@@ -154,12 +108,15 @@ export class Worker<
     this.configurator = configurator
   }
 
-  static fromFile<
+  static async fromFileAsync<
     M extends MainPossibleConfiguration,
     R extends RendererPossibleConfiguration,
-  >({ file, env }: { file: string; env: Env }): Worker<M, R> {
-    const yaml = _loadYaml(file)
-    const configurator = _WorkerConfigurator.fromYaml(yaml)
+  >({ file, env }: { file: string; env: Env }): Promise<Worker<M, R>> {
+    // const yaml = _loadYaml(file)
+    const rawUserConfig = await _loadUserConfig(file)
+    const validator = new Validator()
+    const userConfig = validator.validate(rawUserConfig)
+    const configurator = _WorkerConfigurator.fromConfig(userConfig)
     const main = configByEnv({
       dev: env === 'development',
       type: configurator.main.type,
@@ -199,13 +156,10 @@ export class Worker<
     const rendererConfigPath =
       rendererConfig !== null ? _resolve(rendererConfig.path) : null
 
-    const userMainConfig = await _buildUserConfig<M>(
-      mainConfigPath,
-      Target.main,
-    )
+    const userMainConfig = await _loadUserConfig<M>(mainConfigPath)
 
     const userRendererConfig = rendererConfigPath
-      ? await _buildUserConfig<R>(rendererConfigPath, Target.renderer)
+      ? await _loadUserConfig<R>(rendererConfigPath)
       : null
 
     const mainConfigFinal = this.configurator.main.toBuilderConfig(
@@ -226,7 +180,7 @@ export class Worker<
         : null
 
     return new Config<M, R>({
-      main: new ConfigItem<M, EnvConfig>({
+      main: new ConfigItem<M, MainEnvConfig>({
         config: mainConfigFinal,
         fileConfig: mainConfig,
         target: Target.main,
