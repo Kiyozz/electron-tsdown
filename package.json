@@ -19,7 +19,8 @@
     "fmt:check": "pnpm -r fmt:check",
     "lint": "pnpm -r lint",
     "lint:fix": "pnpm -r lint:fix",
-    "changeset:version": "changeset version"
+    "changeset:version": "changeset version",
+    "changeset:publish": "pnpm -r build && changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "^2.30.0",
