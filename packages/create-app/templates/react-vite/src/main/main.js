@@ -1,13 +1,13 @@
+import * as path from 'node:path'
+import * as url from 'node:url'
 import { app, BrowserWindow } from 'electron'
 import { isDev } from 'electron-util/main'
 import { is } from 'electron-util'
-import * as path from 'node:path'
-import * as url from 'node:url'
 
 /** @type {BrowserWindow | null} */
 let win = null
 
-const dirname = path.dirname(new URL(import.meta.url).pathname)
+const dirname = path.dirname(url.fileURLToPath(import.meta.url))
 
 async function createWindow() {
   win = new BrowserWindow({
@@ -17,13 +17,13 @@ async function createWindow() {
     minWidth: 650,
     webPreferences: {
       nodeIntegration: true,
-      preload: path.join(dirname, 'preload.mjs'),
+      preload: path.join(dirname, 'preload.js'),
     },
     show: false,
   })
 
   if (isDev) {
-    // this is the default port electron-esbuild is using
+    // this is the default port vite is using in the boilerplate
     win.loadURL('http://localhost:9080')
   } else {
     win.loadURL(
@@ -46,10 +46,6 @@ async function createWindow() {
   win.on('ready-to-show', () => {
     win.show()
     win.focus()
-
-    if (isDev) {
-      win.webContents.openDevTools({ mode: 'bottom' })
-    }
   })
 }
 

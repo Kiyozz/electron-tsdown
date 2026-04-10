@@ -10,21 +10,20 @@
     "package": "electron-builder"
   },
   "devDependencies": {
-    "@vitejs/plugin-react-swc": "^3.9.0",
-    "electron": "^36.2.1",
-    "electron-builder": "^26.0.12",
-    "electron-esbuild": "^10.0.0",
-    "electron-util": "^0.18.1",
-    "esbuild": "^0.25.4",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "vite": "^6.3.5"
+    "@vitejs/plugin-react": "^6.0.1",
+    "electron": "^41.2.0",
+    "electron-builder": "^26.8.1",
+    "electron-util": "^1.0.0",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "tsdown": "^0.21.7",
+    "vite": "^8.0.8"
   },
   "build": {
     "appId": "io.comp.myapp",
-    "productName": "My App",
+    "productName": "react-vite-javascript",
     "extraMetadata": {
-      "name": "My App",
+      "name": "react-vite-javascript",
       "main": "main.js"
     },
     "files": [

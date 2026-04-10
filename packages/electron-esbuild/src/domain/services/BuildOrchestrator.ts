@@ -28,10 +28,7 @@ export class BuildOrchestrator {
     config: AppConfig,
     args: string[],
   ): Promise<void> {
-    const entryFile = path.join(
-      config.main.output.dir,
-      config.main.output.filename,
-    )
+    const entryFile = path.join(config.main.outDir, config.main.outFile)
 
     const start = async () => {
       this._logger.debug('Main changed — restarting electron')

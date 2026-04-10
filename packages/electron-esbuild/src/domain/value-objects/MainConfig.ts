@@ -1,29 +1,33 @@
-import type { UserConfig as TsdownUserConfig } from 'tsdown'
 import { z } from 'zod'
 
 import { ConfigError } from '../../errors/ConfigError.js'
 
 export const MainConfigSchema = z.object({
-  configs: z.array(z.custom<TsdownUserConfig>()),
-  output: z.object({
-    dir: z.string(),
-    filename: z.string(),
+  tsdown: z.object({
+    path: z.string(),
+    outDir: z.string(),
+    outFile: z.string(),
   }),
 })
 
 export type MainConfigInput = z.input<typeof MainConfigSchema>
 
 export class MainConfig {
-  readonly configs: TsdownUserConfig[]
-  readonly output: { dir: string; filename: string }
+  readonly path: string
+  readonly outDir: string
+  readonly outFile: string
 
   constructor(raw: unknown) {
     const result = MainConfigSchema.safeParse(raw)
+
     if (!result.success) {
       throw new ConfigError('Invalid main config', result.error)
     }
-    this.configs = result.data.configs as TsdownUserConfig[]
-    this.output = result.data.output
+
+    this.path = result.data.tsdown.path
+    this.outDir = result.data.tsdown.outDir
+    this.outFile = result.data.tsdown.outFile
+
     Object.freeze(this)
   }
 }

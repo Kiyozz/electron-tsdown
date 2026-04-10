@@ -1,17 +1,7 @@
 {
-  "compilerOptions": {
-    "target": "esnext",
-    "lib": ["DOM", "DOM.Iterable", "esnext"],
-    "types": ["vite/client"],
-    "skipLibCheck": true,
-    "esModuleInterop": false,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react"
-  }
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
 }

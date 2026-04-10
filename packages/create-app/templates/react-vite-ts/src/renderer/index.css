@@ -1,20 +1,220 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html {
   font-size: 16px;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, Arial, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
   -webkit-font-smoothing: antialiased;
-  background: white;
+  background: oklch(9% 0.008 271);
+  background-image: radial-gradient(
+    ellipse at 60% 0%,
+    oklch(14% 0.04 272) 0%,
+    oklch(9% 0.008 271) 70%
+  );
+  min-height: 100vh;
+  color: oklch(92% 0.013 252);
+  scrollbar-width: thin;
+  scrollbar-color: oklch(100% 0 0 / 0.28) transparent;
 }
 
-h1 {
-  margin: 0 0 1rem 0;
-  font-size: 2rem;
-  transform: translate3d(0, 0, 0);
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
 
-.padding {
-  padding: 1rem;
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: oklch(100% 0 0 / 0.28);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(100% 0 0 / 0.45);
+}
+
+/* Layout */
+
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+/* Card */
+
+.card {
+  background: oklch(100% 0 0 / 0.04);
+  border: 1px solid oklch(100% 0 0 / 0.08);
+  border-radius: 1.25rem;
+  backdrop-filter: blur(12px);
+  padding: 2.5rem 3rem;
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  box-shadow: 0 8px 40px oklch(0% 0 0 / 0.4);
+}
+
+/* Header */
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.logo {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: linear-gradient(
+    135deg,
+    oklch(92% 0.013 252) 0%,
+    oklch(55% 0.22 270) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.tagline {
+  margin: 0;
+  font-size: 0.875rem;
+  color: oklch(68% 0.04 252);
+}
+
+/* Badges */
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid color-mix(in oklch, var(--badge-color) 40%, transparent);
+  background: color-mix(in oklch, var(--badge-color) 12%, transparent);
+  color: color-mix(in oklch, var(--badge-color) 90%, oklch(92% 0.013 252));
+}
+
+/* Counter */
+
+.counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  border: 1px solid oklch(100% 0 0 / 0.12);
+  background: oklch(100% 0 0 / 0.06);
+  color: oklch(92% 0.013 252);
+  font-size: 1.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    transform 0.1s;
+  line-height: 1;
+  padding: 0;
+}
+
+.btn:hover {
+  background: oklch(55% 0.22 270 / 0.2);
+  border-color: oklch(55% 0.22 270 / 0.5);
+}
+
+.btn:active {
+  transform: scale(0.93);
+}
+
+.count {
+  font-size: 2.5rem;
+  font-weight: 700;
+  min-width: 3rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  color: oklch(92% 0.013 252);
+}
+
+/* Footer */
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.hint {
+  margin: 0;
+  font-size: 0.8rem;
+  color: oklch(52% 0.055 252);
+}
+
+.hint code {
+  font-family: ui-monospace, monospace;
+  font-size: 0.8rem;
+  color: oklch(68% 0.04 252);
+  background: oklch(100% 0 0 / 0.06);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+}
+
+.links {
+  display: flex;
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.links a {
+  font-size: 0.8rem;
+  color: oklch(55% 0.22 270);
+  text-decoration: none;
+  border-bottom: 1px dashed transparent;
+  transition:
+    border-color 0.15s,
+    color 0.15s;
+}
+
+.links a:hover {
+  color: oklch(65% 0.18 272);
+  border-bottom-color: oklch(65% 0.18 272);
 }

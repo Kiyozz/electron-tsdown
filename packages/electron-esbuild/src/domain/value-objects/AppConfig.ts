@@ -17,11 +17,14 @@ export class AppConfig {
 
   constructor(raw: unknown) {
     const result = AppConfigSchema.safeParse(raw)
+
     if (!result.success) {
       throw new ConfigError('Invalid electron-esbuild config', result.error)
     }
+
     this.main = new MainConfig(result.data.main)
     this.renderer = new RendererConfig(result.data.renderer)
+
     Object.freeze(this)
   }
 }

@@ -1,5 +1,5 @@
 import path from 'node:path'
-import { createServer, build, type InlineConfig } from 'vite'
+import * as vite from 'vite'
 
 import type { BundlerInterface } from '../../domain/contracts/BundlerInterface.js'
 import type { LoggerInterface } from '../../domain/contracts/LoggerInterface.js'
@@ -8,28 +8,27 @@ import { BundleError } from '../../errors/BundleError.js'
 
 export class ViteBundler implements BundlerInterface {
   readonly target = 'renderer' as const
-  private readonly _logger: LoggerInterface
+  readonly #logger: LoggerInterface
+  readonly #config: RendererConfig
 
-  constructor(
-    private readonly config: RendererConfig,
-    logger: LoggerInterface,
-  ) {
-    this._logger = logger.child({ component: 'ViteBundler' })
+  constructor(config: RendererConfig, logger: LoggerInterface) {
+    this.#config = config
+    this.#logger = logger.child({ component: 'ViteBundler' })
   }
 
   async build(): Promise<void> {
-    this._logger.info('Building renderer')
+    this.#logger.info('Building renderer')
     try {
-      await build(this._inlineConfig())
+      await vite.build(this.#toInlineConfig())
     } catch (err) {
       throw new BundleError('Renderer build failed', 'renderer', err)
     }
-    this._logger.info('Renderer built')
+    this.#logger.info('Renderer built')
   }
 
   async dev(): Promise<void> {
-    this._logger.info('Starting vite dev server')
-    const server = await createServer(this._inlineConfig())
+    this.#logger.info('Starting vite dev server')
+    const server = await vite.createServer(this.#toInlineConfig())
     await server.listen()
     server.printUrls()
 
@@ -38,13 +37,15 @@ export class ViteBundler implements BundlerInterface {
     })
   }
 
-  private _inlineConfig(): InlineConfig {
+  #toInlineConfig(): vite.InlineConfig {
+    const cwd = process.cwd()
+
     return {
-      configFile: path.resolve(process.cwd(), this.config.configFile),
-      root: path.resolve(process.cwd(), this.config.root),
+      configFile: path.resolve(cwd, this.#config.path),
+      root: path.resolve(cwd, this.#config.root),
       base: '',
       build: {
-        outDir: path.resolve(process.cwd(), this.config.output.dir),
+        outDir: path.resolve(cwd, this.#config.outDir),
         emptyOutDir: true,
       },
     }
