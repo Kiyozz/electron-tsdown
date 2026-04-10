@@ -1,3 +1,15 @@
+## 10.0.0
+
+### Major Changes
+
+- 692c884: Replace esbuild with tsdown for main process bundling.
+- 1a954f0: Rename packages from `electron-esbuild` / `@electron-esbuild/create-app` to `electron-tsdown` / `@electron-tsdown/create-app`.
+- 692c884: Remove some templates for maintainability. The only templates supported now are `react-vite` and `react-vite-ts`.
+
+### Patch Changes
+
+- 284f320: Migrate linting/formatting/git hooks from ESLint+Prettier+husky+lint-staged to oxlint+oxfmt+lefthook.
+
 ## 9.2.0
 
 Updated templates for latest electron versions.

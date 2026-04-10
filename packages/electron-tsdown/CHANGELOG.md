@@ -1,3 +1,23 @@
+## 11.0.0
+
+### Major Changes
+
+- 692c884: Replace esbuild with tsdown for main process bundling.
+- 1a954f0: Rename packages from `electron-esbuild` / `@electron-esbuild/create-app` to `electron-tsdown` / `@electron-tsdown/create-app`.
+- 692c884: Refactor to DDD architecture with IoC container.
+
+  - Replace `meow` CLI with `cac`
+  - Replace `child_process.spawn` with `tinyexec` for electron
+  - Add `pino` + `pino-pretty` logger
+  - Add `@adonisjs/fold` IoC container
+  - New config format: single `electron-tsdown.config.ts` with `defineConfig({ main: { configs, output }, renderer: { configFile, output } })`
+  - Remove YAML config support
+  - `renderer` is now required (no longer optional)
+
+### Patch Changes
+
+- 284f320: Migrate linting/formatting/git hooks from ESLint+Prettier+husky+lint-staged to oxlint+oxfmt+lefthook.
+
 ## 10.0.0
 
 ### Features
@@ -66,6 +86,7 @@
 
   To debug the renderer process, add `-- --remote-debugging-port` to `electron-esbuild dev`.
   Everything after `--` is transferred to the electron process. i.e: `electron-esbuild dev -- --remote-debugging-port`.
+
   - `--remote-debugging-port=9229` will start the devtools to the port 9229
   - `--remote-debugging-port` will start the devtools to a free port
 
@@ -212,7 +233,7 @@ From
 module.exports = (merge) => ({
   ...yourConfig,
   ...merge,
-})
+});
 ```
 
 To
@@ -220,7 +241,7 @@ To
 ```javascript
 module.exports = {
   ...yourConfig,
-}
+};
 ```
 
 ## v1.1.6
