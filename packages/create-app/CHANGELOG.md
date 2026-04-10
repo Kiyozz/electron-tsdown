@@ -1,3 +1,9 @@
+## 10.0.1
+
+### Patch Changes
+
+- 6d7c5ab: All templates were missing "electron-tsdown" as a dependency.
+
 ## 10.0.0
 
 ### Major Changes

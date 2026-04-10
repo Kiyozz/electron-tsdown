@@ -1,3 +1,9 @@
+## 11.0.1
+
+### Patch Changes
+
+- 727936e: Fix wrong import for 'node:process'
+
 ## 11.0.0
 
 ### Major Changes
