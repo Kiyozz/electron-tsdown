@@ -5,7 +5,10 @@ on:
     branches:
       - main
 
-concurrency: ${{ github.workflow }}-${{ github.ref }}
+permissions:
+  contents: write
+  deployments: write
+  id-token: write
 
 jobs:
   release:
