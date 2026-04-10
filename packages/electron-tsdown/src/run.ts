@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { cac } from 'cac'
+import * as process from 'node:process'
 
 import { BuildCommand } from './application/BuildCommand.js'
 import { DevCommand } from './application/DevCommand.js'

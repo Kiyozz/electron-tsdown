@@ -1,12 +1,13 @@
 import pino from 'pino'
+import * as process from 'node:process'
 
 import type { LoggerInterface } from '../domain/contracts/LoggerInterface.js'
 
 export class PinoLogger implements LoggerInterface {
-  private readonly _pino: pino.Logger
+  readonly #pino: pino.Logger
 
   constructor(pinoInstance?: pino.Logger) {
-    this._pino =
+    this.#pino =
       pinoInstance ??
       pino({
         transport: {
@@ -22,22 +23,22 @@ export class PinoLogger implements LoggerInterface {
   }
 
   info(msg: string, data?: Record<string, unknown>): void {
-    this._pino.info(data ?? {}, msg)
+    this.#pino.info(data ?? {}, msg)
   }
 
   warn(msg: string, data?: Record<string, unknown>): void {
-    this._pino.warn(data ?? {}, msg)
+    this.#pino.warn(data ?? {}, msg)
   }
 
   error(msg: string, data?: Record<string, unknown>): void {
-    this._pino.error(data ?? {}, msg)
+    this.#pino.error(data ?? {}, msg)
   }
 
   debug(msg: string, data?: Record<string, unknown>): void {
-    this._pino.debug(data ?? {}, msg)
+    this.#pino.debug(data ?? {}, msg)
   }
 
   child(bindings: Record<string, unknown>): LoggerInterface {
-    return new PinoLogger(this._pino.child(bindings))
+    return new PinoLogger(this.#pino.child(bindings))
   }
 }

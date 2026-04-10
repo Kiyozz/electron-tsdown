@@ -1,4 +1,5 @@
-import path from 'node:path'
+import * as path from 'node:path'
+import * as process from 'node:process'
 import * as vite from 'vite'
 
 import type { BundlerInterface } from '../../domain/contracts/BundlerInterface.js'

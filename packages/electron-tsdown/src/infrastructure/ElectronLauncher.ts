@@ -1,5 +1,6 @@
-import os from 'node:os'
-import path from 'node:path'
+import * as os from 'node:os'
+import * as path from 'node:path'
+import * as process from 'node:process'
 import { x } from 'tinyexec'
 
 import type { ElectronLauncherInterface } from '../domain/contracts/ElectronLauncherInterface.js'
@@ -9,26 +10,27 @@ const _isWindows = os.platform() === 'win32'
 const _electronBin = _isWindows ? 'electron.cmd' : 'electron'
 
 export class ElectronLauncher implements ElectronLauncherInterface {
-  private _proc: ReturnType<typeof x> | null = null
-  private readonly _logger: LoggerInterface
+  readonly #logger: LoggerInterface
+
+  #proc: ReturnType<typeof x> | null = null
 
   constructor(logger: LoggerInterface) {
-    this._logger = logger.child({ component: 'ElectronLauncher' })
+    this.#logger = logger.child({ component: 'ElectronLauncher' })
     this._registerSignalHandlers()
   }
 
   async launch(entryFile: string, args: string[]): Promise<void> {
     const bin = path.resolve(`node_modules/.bin/${_electronBin}`)
-    this._logger.info('Starting electron', { entryFile })
+    this.#logger.info('Starting electron', { entryFile })
 
-    this._proc = x(bin, [entryFile, ...args], {
+    this.#proc = x(bin, [entryFile, ...args], {
       nodeOptions: { stdio: 'inherit' },
       throwOnError: false,
     })
 
-    this._proc.process?.on('close', (code, signal) => {
+    this.#proc.process?.on('close', (code, signal) => {
       if (code === null) {
-        this._logger.error('Electron exited with signal', { signal })
+        this.#logger.error('Electron exited with signal', { signal })
         process.exit(1)
       }
 
@@ -42,14 +44,14 @@ export class ElectronLauncher implements ElectronLauncherInterface {
   }
 
   async kill(): Promise<void> {
-    if (!this._proc?.process) return
+    if (!this.#proc?.process) return
 
-    this._logger.debug('Killing electron process')
+    this.#logger.debug('Killing electron process')
 
-    this._proc.process.removeAllListeners('close')
+    this.#proc.process.removeAllListeners('close')
 
     if (_isWindows) {
-      const pid = this._proc.process.pid
+      const pid = this.#proc.process.pid
 
       if (pid) {
         x('taskkill', ['/pid', String(pid), '/f', '/t'], {
@@ -58,16 +60,16 @@ export class ElectronLauncher implements ElectronLauncherInterface {
         })
       }
     } else {
-      this._proc.kill()
+      this.#proc.kill()
     }
 
-    this._proc = null
+    this.#proc = null
   }
 
   private _registerSignalHandlers(): void {
     const cleanup = (signal: NodeJS.Signals) => {
       process.on(signal, async () => {
-        this._logger.debug('Received signal, cleaning up', { signal })
+        this.#logger.debug('Received signal, cleaning up', { signal })
         await this.kill()
         process.exit(0)
       })

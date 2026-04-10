@@ -1,4 +1,4 @@
-import path from 'node:path'
+import * as path from 'node:path'
 
 import type { BundlerInterface } from '../contracts/BundlerInterface.js'
 import type { ElectronLauncherInterface } from '../contracts/ElectronLauncherInterface.js'
@@ -10,15 +10,19 @@ import type { AppConfig } from '../value-objects/AppConfig.js'
  * Pure domain logic — no infrastructure imports.
  */
 export class BuildOrchestrator {
-  constructor(private readonly _logger: LoggerInterface) {}
+  readonly #logger: LoggerInterface
+
+  constructor(logger: LoggerInterface) {
+    this.#logger = logger
+  }
 
   async build(
     main: BundlerInterface,
     renderer: BundlerInterface,
   ): Promise<void> {
-    this._logger.info('Building')
+    this.#logger.info('Building')
     await Promise.all([main.build(), renderer.build()])
-    this._logger.info('Build complete')
+    this.#logger.info('Build complete')
   }
 
   async dev(
@@ -31,14 +35,14 @@ export class BuildOrchestrator {
     const entryFile = path.join(config.main.outDir, config.main.outFile)
 
     const start = async () => {
-      this._logger.debug('Main changed — restarting electron')
+      this.#logger.debug('Main changed — restarting electron')
       await launcher.restart(entryFile, args)
     }
 
-    this._logger.debug('Starting renderer dev server')
+    this.#logger.debug('Starting renderer dev server')
     await renderer.dev(start)
 
-    this._logger.debug('Starting main watcher')
+    this.#logger.debug('Starting main watcher')
     await main.dev(start)
   }
 }

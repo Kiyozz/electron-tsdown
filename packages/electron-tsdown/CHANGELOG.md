@@ -66,7 +66,6 @@
 
   To debug the renderer process, add `-- --remote-debugging-port` to `electron-esbuild dev`.
   Everything after `--` is transferred to the electron process. i.e: `electron-esbuild dev -- --remote-debugging-port`.
-
   - `--remote-debugging-port=9229` will start the devtools to the port 9229
   - `--remote-debugging-port` will start the devtools to a free port
 

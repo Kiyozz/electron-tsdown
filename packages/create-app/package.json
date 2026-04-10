@@ -38,15 +38,15 @@
     "lint:fix": "oxlint --fix src"
   },
   "dependencies": {
-    "cross-spawn": "^7.0.3",
-    "enquirer": "^2.3.6",
+    "cross-spawn": "^7.0.6",
+    "enquirer": "^2.4.1",
     "kolorist": "^1.8.0",
     "minimist": "^1.2.8"
   },
   "devDependencies": {
-    "@types/cross-spawn": "^6.0.2",
-    "@types/minimist": "^1.2.2",
-    "@types/node": "^22.15.20",
+    "@types/cross-spawn": "^6.0.6",
+    "@types/minimist": "^1.2.5",
+    "@types/node": "^22.19.17",
     "tsdown": "^0.21.7",
     "typescript": "~5.8.3"
   },

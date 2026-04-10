@@ -1,3 +1,4 @@
+import * as process from 'node:process'
 import { loadConfig } from 'unconfig'
 
 import type { ConfigLoaderInterface } from '../domain/contracts/ConfigLoaderInterface.js'
