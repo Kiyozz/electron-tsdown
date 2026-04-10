@@ -1,6 +1,6 @@
 {
   "name": "@electron-tsdown/create-app",
-  "version": "9.2.0",
+  "version": "10.0.0",
   "description": "Create Electron tsdown powered apps with one command",
   "keywords": [
     "cli",
