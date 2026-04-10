@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Packages/electron-esbuild - prepublishOnly" type="js.build_tools.npm" activateToolWindowBeforeRun="false">
-    <package-json value="$PROJECT_DIR$/packages/electron-esbuild/package.json" />
+  <configuration default="false" name="Packages/electron-tsdown - prepublishOnly" type="js.build_tools.npm" activateToolWindowBeforeRun="false">
+    <package-json value="$PROJECT_DIR$/packages/electron-tsdown/package.json" />
     <command value="run" />
     <scripts>
       <script value="prepublishOnly" />

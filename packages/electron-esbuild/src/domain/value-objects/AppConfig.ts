@@ -19,7 +19,7 @@ export class AppConfig {
     const result = AppConfigSchema.safeParse(raw)
 
     if (!result.success) {
-      throw new ConfigError('Invalid electron-esbuild config', result.error)
+      throw new ConfigError('Invalid electron-tsdown config', result.error)
     }
 
     this.main = new MainConfig(result.data.main)

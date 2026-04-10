@@ -38,7 +38,7 @@ export class TsdownBundler implements BundlerInterface {
     const config = this.#toInlineConfig()
     const debouncedRebuild = debounce(onRebuild, { wait: 200 })
     const startPlugin: tsdown.Rolldown.Plugin = {
-      name: 'electron-esbuild-start',
+      name: 'electron-tsdown-start',
       writeBundle() {
         debouncedRebuild()
       },

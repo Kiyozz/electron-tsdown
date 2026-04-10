@@ -1,25 +1,25 @@
-# @electron-esbuild/create-app
+# @electron-tsdown/create-app
 
-[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Kiyozz/electron-esbuild/blob/HEAD/LICENSE)
-[![@electron-esbuild/create-app version](https://img.shields.io/npm/v/@electron-esbuild/create-app.svg)](./CHANGELOG.md)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Kiyozz/electron-tsdown/blob/HEAD/LICENSE)
+[![@electron-tsdown/create-app version](https://img.shields.io/npm/v/@electron-tsdown/create-app.svg)](./CHANGELOG.md)
 
-The easiest way to get started with Esbuild/Vite in Electron by using `@electron-esbuild/create-app`. This simple CLI tool enables you to quickly start building a new Electron application.
+The easiest way to get started with tsdown/vite in Electron by using `@electron-tsdown/create-app`. This simple CLI tool enables you to quickly start building a new Electron application.
 
 With pnpm:
 
-    pnpm create @electron-esbuild/app
+    pnpm create @electron-tsdown/app
 
 With npm:
 
-    npm init @electron-esbuild/app
+    npm init @electron-tsdown/app
 
 With yarn:
 
-    yarn create @electron-esbuild/app
+    yarn create @electron-tsdown/app
 
 ## Options
 
-`@electron-esbuild/create-app` comes with the following options:
+`@electron-tsdown/create-app` comes with the following options:
 
 - -t, --template use template
 - -p, --package-manager use this package manager [npm, pnpm, yarn]
@@ -29,11 +29,5 @@ With yarn:
 
 ## Supported templates
 
-- `main`
-- `main-ts`
-- `react`
-- `react-ts`
 - `react-vite`
 - `react-vite-ts`
-- `svelte`
-- `svelte-ts`

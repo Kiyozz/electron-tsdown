@@ -11,12 +11,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 # Build a package
-pnpm --filter electron-esbuild build
-pnpm --filter @electron-esbuild/create-app build
+pnpm --filter electron-tsdown build
+pnpm --filter @electron-tsdown/create-app build
 
 # Lint
-pnpm --filter electron-esbuild lint
-pnpm --filter @electron-esbuild/create-app lint
+pnpm --filter electron-tsdown lint
+pnpm --filter @electron-tsdown/create-app lint
 
 # Build all
 pnpm -r build
@@ -28,27 +28,27 @@ No test suite exists. Build (`tsc -b && tsdown`) is the primary validation.
 
 Monorepo with `pnpm` workspaces. Two published packages:
 
-### `electron-esbuild` (packages/electron-esbuild)
+### `electron-tsdown` (packages/electron-tsdown)
 
-CLI tool (`electron-esbuild dev|build`) that orchestrates building an Electron app:
+CLI tool (`electron-tsdown dev|build`) that orchestrates building an Electron app:
 
 - **Main process** → built via `tsdown` (TsdownBuilder)
 - **Renderer process** → built via `vite` (ViteBuilder)
 
-Flow: `run.ts` (CLI entry via meow) → `dev.ts`/`build.ts` commands → `Worker` loads & validates config (Zod) → `Config` instantiates builders → builders call `build()`/`dev()`.
+Flow: `run.ts` (CLI entry via cac) → `dev.ts`/`build.ts` commands → `Worker` loads & validates config (Zod) → `Config` instantiates builders → builders call `build()`/`dev()`.
 
-Config is loaded from `electron-esbuild.config.yaml` (or `.js`/`.ts` via unconfig). The `defineConfig()` function is the library export for typed config.
+Config is loaded from `electron-tsdown.config.ts` (or `.js` via unconfig). The `defineConfig()` function is the library export for typed config.
 
 Key dirs in `src/`:
 
 - `builder/` — `TsdownBuilder`, `ViteBuilder`, `BaseBuilder`
 - `config/configurators/` — per-bundler configurator classes
-- `config/` — types, validation (Zod schemas), YAML parsing, constants
+- `config/` — types, validation (Zod schemas), constants
 - `commands/` — `dev.ts`, `build.ts`
 
-### `@electron-esbuild/create-app` (packages/create-app)
+### `@electron-tsdown/create-app` (packages/create-app)
 
-Scaffolding CLI (`npm init @electron-esbuild/app`). Uses `enquirer` for interactive prompts, picks a template from `templates/`, installs deps with detected package manager.
+Scaffolding CLI (`npm init @electron-tsdown/app`). Uses `enquirer` for interactive prompts, picks a template from `templates/`, installs deps with detected package manager.
 
 ## Tooling
 
@@ -64,10 +64,10 @@ Add a changeset file to `.changeset/` when changing a published package:
 
 ```md
 ---
-'electron-esbuild': patch
+'electron-tsdown': patch
 ---
 
 Description.
 ```
 
-Use `"@electron-esbuild/create-app"` for the create-app package.
+Use `"@electron-tsdown/create-app"` for the create-app package.

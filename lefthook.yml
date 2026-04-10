@@ -1,8 +1,8 @@
 pre-commit:
   parallel: true
   jobs:
-    - name: electron-esbuild
-      root: 'packages/electron-esbuild/'
+    - name: electron-tsdown
+      root: 'packages/electron-tsdown/'
       group:
         parallel: false
         jobs:

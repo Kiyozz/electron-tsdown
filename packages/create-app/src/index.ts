@@ -67,7 +67,7 @@ try {
       type: 'input',
       name: 'name',
       message: 'Project name:',
-      initial: 'electron-esbuild-project',
+      initial: 'electron-tsdown-project',
     })
 
     projectName = name

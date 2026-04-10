@@ -13,7 +13,7 @@
 ### Breaking Changes
 
 - now flagged as type module in package.json
-- This package is now pure ESM (because electron-esbuild is mainly a cli, this should work out of the box).
+- This package is now pure ESM (because electron-tsdown is mainly a cli, this should work out of the box).
   Please [read this](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
 
 ## 8.0.0
@@ -21,7 +21,7 @@
 ### Breaking Changes
 
 - require node@18.15.0 to be synchronized with electron@25.0.0
-- support for esbuild@0.18 ([#53](https://github.com/Kiyozz/electron-esbuild/pull/53), thanks to [@jonluca](https://github.com/jonluca))
+- support for esbuild@0.18 ([#53](https://github.com/Kiyozz/electron-tsdown/pull/53), thanks to [@jonluca](https://github.com/jonluca))
 
 ### Features
 

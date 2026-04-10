@@ -4,5 +4,5 @@ node_modules
 # Build output
 dist
 
-# Used for testing created app through create-electron-esbuild-app
+# Used for testing created app through @electron-tsdown/create-app
 var

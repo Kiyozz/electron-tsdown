@@ -1,5 +1,5 @@
 # CHANGELOG
 
-[electron-esbuild](packages/electron-esbuild/CHANGELOG.md)
+[electron-tsdown](packages/electron-tsdown/CHANGELOG.md)
 
 [create-app](packages/create-app/CHANGELOG.md)

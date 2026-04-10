@@ -18,7 +18,7 @@ Updated templates for latest electron versions.
 ### Breaking Changes
 
 - require node@18.15.0 to be synchronized with electron@25.0.0
-- support for esbuild@0.18 ([#53](https://github.com/Kiyozz/electron-esbuild/pull/53), thanks to [@jonluca](https://github.com/jonluca))
+- support for esbuild@0.18 ([#53](https://github.com/Kiyozz/electron-tsdown/pull/53), thanks to [@jonluca](https://github.com/jonluca))
 
 ## v4.0.1
 
@@ -28,7 +28,7 @@ Updated templates for latest electron versions.
 
 ### Bug fixes
 
-- Fixed templates with the latest version of electron-esbuild
+- Fixed templates with the latest version of electron-tsdown
 
 ## v3.0.0
 
@@ -59,7 +59,7 @@ Updated templates for latest electron versions.
 ### Breaking changes
 
 - Require Node.js 14
-- This package is now pure ESM (because @electron-esbuild/create-app is mainly a cli, this should work out of the box).
+- This package is now pure ESM (because @electron-tsdown/create-app is mainly a cli, this should work out of the box).
   Please [read this](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
 
 ### Changes
@@ -84,7 +84,7 @@ Updated templates for latest electron versions.
 ### Features
 
 - Updated dependencies
-- Updated templates to reflect new version of electron-esbuild
+- Updated templates to reflect new version of electron-tsdown
 
 ## v1.6.1
 

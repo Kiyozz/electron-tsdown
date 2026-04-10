@@ -55,7 +55,7 @@ importers:
         specifier: ~5.8.3
         version: 5.8.3
 
-  packages/electron-esbuild:
+  packages/electron-tsdown:
     dependencies:
       '@adonisjs/fold':
         specifier: ^11.0.0

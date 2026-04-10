@@ -1,8 +1,8 @@
 {
-  "name": "electron-esbuild-monorepo",
+  "name": "electron-tsdown-monorepo",
   "version": "10.0.0",
-  "description": "Use esbuild/vite with Electron for blazing fast compilation",
-  "repository": "https://github.com/Kiyozz/electron-esbuild",
+  "description": "Use tsdown/vite with Electron for blazing fast compilation",
+  "repository": "https://github.com/Kiyozz/electron-tsdown",
   "author": {
     "name": "Kévin TURMEL",
     "email": "kevinturmel@gmail.com",

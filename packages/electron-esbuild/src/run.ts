@@ -9,7 +9,7 @@ import { BundleError } from './errors/BundleError.js'
 import { ConfigError } from './errors/ConfigError.js'
 import { LaunchError } from './errors/LaunchError.js'
 
-const cli = cac('electron-esbuild')
+const cli = cac('electron-tsdown')
 const container = buildContainer()
 
 cli.command('build', 'Build for production').action(async () => {

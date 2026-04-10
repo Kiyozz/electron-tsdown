@@ -1,12 +1,12 @@
 {
   "name": "react-vite-javascript",
   "version": "1.0.0",
-  "description": "A simple Electron app built with electron-esbuild",
-  "author": "built by electron-esbuild",
+  "description": "A simple Electron app built with electron-tsdown",
+  "author": "built by electron-tsdown",
   "type": "module",
   "scripts": {
-    "dev": "electron-esbuild dev",
-    "build": "electron-esbuild build",
+    "dev": "electron-tsdown dev",
+    "build": "electron-tsdown build",
     "package": "electron-builder"
   },
   "devDependencies": {

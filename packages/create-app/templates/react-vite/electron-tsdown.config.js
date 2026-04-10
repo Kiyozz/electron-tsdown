@@ -1,4 +1,4 @@
-import { defineConfig } from 'electron-esbuild'
+import { defineConfig } from 'electron-tsdown'
 
 export default defineConfig({
   main: {

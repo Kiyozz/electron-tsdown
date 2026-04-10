@@ -1,7 +1,6 @@
 packages:
   - packages/create-app
-  - packages/ee
-  - packages/electron-esbuild
+  - packages/electron-tsdown
 
 ignoredBuiltDependencies:
   - svelte-preprocess

@@ -1,34 +1,33 @@
-# electron-esbuild
+# electron-tsdown
 
-[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Kiyozz/electron-esbuild/blob/HEAD/LICENSE)
-![electron-esbuild version](https://img.shields.io/npm/v/electron-esbuild.svg?label=%20)
-![github-actions](https://github.com/Kiyozz/electron-esbuild/workflows/CI/badge.svg)
-![electron-esbuild downloads](https://img.shields.io/npm/dm/electron-esbuild.svg)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Kiyozz/electron-tsdown/blob/HEAD/LICENSE)
+![electron-tsdown version](https://img.shields.io/npm/v/electron-tsdown.svg?label=%20)
+![github-actions](https://github.com/Kiyozz/electron-tsdown/workflows/CI/badge.svg)
+![electron-tsdown downloads](https://img.shields.io/npm/dm/electron-tsdown.svg)
 
-Easily integrate `esbuild`/`vite` for your Electron environment.
+Easily integrate `tsdown`/`vite` for your Electron environment.
 
 ## Features
 
-- Use of `esbuild` for main source code building
+- Use of `tsdown` for main source code building
 - Use of `vite` for renderer source code building
 - HMR for `renderer` and `main` processes
-- Full control of your esbuild configuration
+- Full control of your tsdown configuration
 - Full control of your vite configuration
 - Use electron-builder for final package
 
-## [Getting Started](packages/electron-esbuild/README.md)
+## [Getting Started](packages/electron-tsdown/README.md)
 
 ## Packages
 
-| Package                                             | Version                                                                                                                            |
-| --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| [electron-esbuild](packages/electron-esbuild)       | [![electron-esbuild version](https://img.shields.io/npm/v/electron-esbuild.svg?label=%20)](packages/electron-esbuild/CHANGELOG.md) |
-| [@electron-esbuild/create-app](packages/create-app) | [![create-app version](https://img.shields.io/npm/v/@electron-esbuild/create-app.svg?label=%20)](packages/create-app/CHANGELOG.md) |
-| [@electron-esbuild/ee](packages/ee)                 | ![ee version](https://img.shields.io/npm/v/@electron-esbuild/ee.svg?label=%20)                                                     |
+| Package                                            | Version                                                                                                                           |
+| -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| [electron-tsdown](packages/electron-tsdown)       | [![electron-tsdown version](https://img.shields.io/npm/v/electron-tsdown.svg?label=%20)](packages/electron-tsdown/CHANGELOG.md) |
+| [@electron-tsdown/create-app](packages/create-app) | [![create-app version](https://img.shields.io/npm/v/@electron-tsdown/create-app.svg?label=%20)](packages/create-app/CHANGELOG.md) |
 
 ## Development
 
-This repository use node@18 for source code and pnpm workspace
+This repository uses node@24 and pnpm workspaces.
 
 ```shell
 pnpm i
