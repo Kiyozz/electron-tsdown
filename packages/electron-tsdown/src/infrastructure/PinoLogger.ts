@@ -1,5 +1,5 @@
 import pino from 'pino'
-import * as process from 'node:process'
+import process from 'node:process'
 
 import type { LoggerInterface } from '../domain/contracts/LoggerInterface.js'
 

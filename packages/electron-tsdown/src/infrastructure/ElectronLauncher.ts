@@ -1,6 +1,6 @@
 import * as os from 'node:os'
 import * as path from 'node:path'
-import * as process from 'node:process'
+import process from 'node:process'
 import { x } from 'tinyexec'
 
 import type { ElectronLauncherInterface } from '../domain/contracts/ElectronLauncherInterface.js'
