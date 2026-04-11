@@ -1,3 +1,9 @@
+## 11.0.2
+
+### Patch Changes
+
+- a4a9bbe: Better display of renderer build failures
+
 ## 11.0.1
 
 ### Patch Changes
