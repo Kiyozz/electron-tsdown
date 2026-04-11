@@ -22,6 +22,8 @@ export class ViteBundler implements BundlerInterface {
     try {
       await vite.build(this.#toInlineConfig())
     } catch (err) {
+      console.error(err)
+
       throw new BundleError('Renderer build failed', 'renderer', err)
     }
     this.#logger.info('Renderer built')
