@@ -18,6 +18,7 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    environment: Publishing
     steps:
       - uses: actions/checkout@v6
 
