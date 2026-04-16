@@ -1,3 +1,9 @@
+## 11.0.4
+
+### Patch Changes
+
+- 20043eb: Use tsdown `build:done` hook instead of rolldown `writeBundle` plugin for electron restart in dev mode. Avoids inline plugins merging with user config plugins, which could interfere with rolldown plugin initialization (e.g. babel macro transforms).
+
 ## 11.0.3
 
 ### Patch Changes
