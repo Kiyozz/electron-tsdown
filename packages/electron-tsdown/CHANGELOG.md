@@ -1,3 +1,9 @@
+## 11.0.3
+
+### Patch Changes
+
+- da2c01f: Update dependencies
+
 ## 11.0.2
 
 ### Patch Changes
