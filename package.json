@@ -19,7 +19,7 @@
     "fmt:check": "pnpm -r fmt:check",
     "lint": "pnpm -r lint",
     "lint:fix": "pnpm -r lint:fix",
-    "changeset:version": "changeset version",
+    "changeset:version": "changeset version && node scripts/sync-template-deps.mjs",
     "changeset:publish": "pnpm -r build && changeset publish --provenance"
   },
   "devDependencies": {
@@ -27,7 +27,7 @@
     "lefthook": "^2.1.6",
     "oxfmt": "^0.44.0",
     "oxlint": "^1.60.0",
-    "typescript": "~6.0.2"
+    "typescript": "~7.0.2"
   },
   "packageManager": "pnpm@10.33.0",
   "volta": {

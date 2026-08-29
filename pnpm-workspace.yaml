@@ -2,9 +2,5 @@ packages:
   - packages/create-app
   - packages/electron-tsdown
 
-ignoredBuiltDependencies:
-  - svelte-preprocess
 onlyBuiltDependencies:
-  - electron
   - lefthook
-  - tsdown

@@ -1,0 +1,97 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Lint, format, build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'pnpm'
+          cache-dependency-path: 'pnpm-lock.yaml'
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm lint
+
+      - run: pnpm fmt:check
+
+      # `build` is `tsc -b && tsdown`, so this type-checks both packages too.
+      - run: pnpm -r build
+
+  template:
+    name: Scaffold ${{ matrix.template }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        template:
+          - react-vite
+          - react-vite-ts
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'pnpm'
+          cache-dependency-path: 'pnpm-lock.yaml'
+
+      - run: pnpm install --frozen-lockfile
+
+      # Pack the tarball rather than linking the source directory, so the
+      # template is built against exactly what `changeset publish` would upload.
+      - name: Pack electron-tsdown
+        run: |
+          pnpm --filter electron-tsdown build
+          pnpm --filter electron-tsdown exec pnpm pack --pack-destination "$RUNNER_TEMP"
+          echo "TARBALL=$(ls "$RUNNER_TEMP"/electron-tsdown-*.tgz)" >> "$GITHUB_ENV"
+
+      - name: Scaffold the template
+        run: |
+          cp -r "packages/create-app/templates/${{ matrix.template }}" "$RUNNER_TEMP/app"
+          cd "$RUNNER_TEMP/app"
+          mv gitignore .gitignore
+          npm pkg set "devDependencies.electron-tsdown=file:$TARBALL"
+
+      # The published range is only valid once electron-tsdown is released, so
+      # the scaffolded app resolves everything else from the registry and takes
+      # electron-tsdown from the tarball above.
+      - name: Install
+        run: pnpm install --no-frozen-lockfile
+        working-directory: ${{ runner.temp }}/app
+
+      - name: Type-check
+        if: endsWith(matrix.template, '-ts')
+        run: pnpm typecheck
+        working-directory: ${{ runner.temp }}/app
+
+      - name: Build
+        run: pnpm build
+        working-directory: ${{ runner.temp }}/app
+
+      - name: Check the build output
+        run: |
+          test -f dist/main/main.js
+          test -f dist/main/preload.js
+          test -f dist/renderer/index.html
+          # electron-tsdown forces `dts: false` on the main process build.
+          ! ls dist/main/*.d.ts 2>/dev/null
+        working-directory: ${{ runner.temp }}/app
