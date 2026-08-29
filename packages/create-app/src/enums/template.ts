@@ -7,8 +7,4 @@
 export enum Template {
   ReactViteJavaScript = 'react-vite',
   ReactViteTypeScript = 'react-vite-ts',
-  MainOnlyTypeScript = 'main-ts',
-  MainOnlyJavaScript = 'main',
-  SvelteJavaScript = 'svelte',
-  SvelteTypeScript = 'svelte-ts',
 }
