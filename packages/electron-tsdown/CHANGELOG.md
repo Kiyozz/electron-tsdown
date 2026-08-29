@@ -1,3 +1,31 @@
+## 12.0.0
+
+### Major Changes
+
+- afa23a0: Require `tsdown` 0.22.
+
+  `deps.skipNodeModulesBundle` is deprecated in tsdown 0.22, so the main process
+  build now uses `deps.neverBundle: true` instead. tsdown throws when both are
+  set, so **remove `deps.skipNodeModulesBundle` from your own `tsdown.config.ts`**
+  — electron-tsdown already externalizes `node_modules` for you.
+
+  `dts` is now forced off for the main process build. tsdown 0.22 turns it on by
+  itself when the `package.json` has a `types`/`exports` types entry or the
+  tsconfig sets `declaration: true`, which only emits unused declaration files.
+
+  Minimum Node version follows tsdown's: `^22.18.0 || >=24.11.0`.
+
+### Minor Changes
+
+- afa23a0: `defineConfig()` is now generic (`<T extends AppConfigInput>(config: T): T`), so
+  it returns the exact config object type instead of widening it to
+  `AppConfigInput`.
+
+  The package entry used to declare its own non-generic copy of `defineConfig`,
+  shadowing the generic one in `src/define-config.ts` — which was compiled and
+  published but unreachable, since `exports` only maps `.`. The entry now
+  re-exports the generic implementation, and `AppConfigInput` is exported as a type.
+
 ## 11.0.4
 
 ### Patch Changes
