@@ -37,7 +37,7 @@
     "build": "tsc -b && tsdown",
     "prepublishOnly": "tsc -b && tsdown",
     "fmt": "oxfmt",
-    "fmt:check": "oxfmt --check.",
+    "fmt:check": "oxfmt --check .",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix"
   },
@@ -52,17 +52,17 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@types/node": "^24.12.2",
-    "tsdown": "^0.21.9",
-    "typescript": "~6.0.2",
+    "@types/node": "^24.13.3",
+    "tsdown": "^0.22.14",
+    "typescript": "~7.0.2",
     "vite": "^8.0.8"
   },
   "peerDependencies": {
-    "tsdown": "^0.21.7",
+    "tsdown": "^0.22.0",
     "vite": "8.x"
   },
   "engines": {
-    "node": ">=22",
+    "node": "^22.18.0 || >=24.11.0",
     "pnpm": "10"
   }
 }

@@ -1,5 +1,2 @@
-import { AppConfigInput } from './domain/value-objects/AppConfig.js'
-
-export function defineConfig(config: AppConfigInput) {
-  return config
-}
+export { defineConfig } from './define-config.js'
+export type { AppConfigInput } from './domain/value-objects/AppConfig.js'

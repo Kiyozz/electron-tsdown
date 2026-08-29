@@ -8,5 +8,9 @@ export default defineConfig({
   singleQuote: true,
   trailingComma: 'all',
   endOfLine: 'lf',
-  ignorePatterns: ['packages/create-app/var', 'packages/**/dist']
+  ignorePatterns: [
+    '**/CHANGELOG.md',
+    'packages/create-app/var',
+    'packages/**/dist',
+  ],
 })

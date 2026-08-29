@@ -3,6 +3,7 @@
     "composite": true,
     "tsBuildInfoFile": "node_modules/.tmp/tsconfig.node.tsbuildinfo",
     "target": "es2022",
+    "lib": ["ES2023"],
     "module": "node16",
     "moduleResolution": "node16",
     "strict": true,
@@ -11,6 +12,7 @@
     "noEmit": true
   },
   "include": [
+    "src/main/**/*.ts",
     "electron-tsdown.config.ts",
     "tsdown.config.ts",
     "src/renderer/vite.config.ts"

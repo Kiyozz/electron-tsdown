@@ -19,11 +19,12 @@ npm run dev
 
 ## Scripts
 
-| Command   | Description                           |
-| --------- | ------------------------------------- |
-| `dev`     | Start in development mode with HMR    |
-| `build`   | Build for production                  |
-| `package` | Package the app with electron-builder |
+| Command     | Description                           |
+| ----------- | ------------------------------------- |
+| `dev`       | Start in development mode with HMR    |
+| `build`     | Build for production                  |
+| `typecheck` | Type-check main and renderer          |
+| `package`   | Package the app with electron-builder |
 
 ## Project structure
 

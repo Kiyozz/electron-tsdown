@@ -6,7 +6,7 @@ export default defineConfig({
   clean: true,
   format: 'esm',
   outExtensions: () => ({ js: '.js' }),
-  target: 'node24.14', // electron 41
+  target: 'node22.18', // lowest supported node, see `engines`
   tsconfig: './tsconfig.app.json',
   dts: true,
   deps: {
