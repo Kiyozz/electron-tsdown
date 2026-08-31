@@ -1,0 +1,5 @@
+# pnpm 12 fails the install when a dependency's build script is neither
+# allowed nor ignored. electron-winstaller only needs its script to build a
+# Squirrel.Windows installer — set it to `true` if you target one.
+allowBuilds:
+  electron-winstaller: false

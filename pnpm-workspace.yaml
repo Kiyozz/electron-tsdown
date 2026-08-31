@@ -2,5 +2,5 @@ packages:
   - packages/create-app
   - packages/electron-tsdown
 
-onlyBuiltDependencies:
-  - lefthook
+allowBuilds:
+  lefthook: true
