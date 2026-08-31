@@ -10,6 +10,21 @@ import { BundleError } from './errors/BundleError.js'
 import { ConfigError } from './errors/ConfigError.js'
 import { LaunchError } from './errors/LaunchError.js'
 
+const _ownFlags = new Set(['-h', '--help', '-v', '--version'])
+
+/**
+ * Everything given after the command name that electron-tsdown does not own is
+ * forwarded as-is to the electron process, with or without a `--` separator.
+ */
+function forwardedArgs(argv: string[], command: string): string[] {
+  const args = argv.slice(2)
+  const index = args.indexOf(command)
+
+  return (index === -1 ? args : args.slice(index + 1)).filter(
+    (arg) => arg !== '--' && !_ownFlags.has(arg),
+  )
+}
+
 const cli = cac('electron-tsdown')
 const container = buildContainer()
 
@@ -21,9 +36,10 @@ cli.command('build', 'Build for production').action(async () => {
 
 cli
   .command('dev', 'Start development environment')
-  .action(async (_, rawArgs: string[]) => {
+  .allowUnknownOptions()
+  .action(async () => {
     const command = await container.make(DevCommand)
-    await command.execute(rawArgs ?? [])
+    await command.execute(forwardedArgs(process.argv, 'dev'))
   })
 
 cli.help()
