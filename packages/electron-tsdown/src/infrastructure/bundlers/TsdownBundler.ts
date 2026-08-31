@@ -57,7 +57,7 @@ export class TsdownBundler implements BundlerInterface {
         return { js: '.js' }
       },
       deps: {
-        neverBundle: true,
+        neverBundle: [/^node:/i, /^electron$/i],
       },
       // tsdown enables `dts` on its own when the package or the tsconfig looks
       // like a library. The main process is never one, and the extra
