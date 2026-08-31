@@ -21,7 +21,7 @@ export class ElectronLauncher implements ElectronLauncherInterface {
 
   async launch(entryFile: string, args: string[]): Promise<void> {
     const bin = path.resolve(`node_modules/.bin/${_electronBin}`)
-    this.#logger.info('Starting electron', { entryFile })
+    this.#logger.info('Starting electron', { entryFile, args })
 
     this.#proc = x(bin, [entryFile, ...args], {
       nodeOptions: { stdio: 'inherit' },

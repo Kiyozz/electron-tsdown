@@ -25,11 +25,19 @@ Start a development build
 npm run dev
 ```
 
-All arguments after `--` will be pass through the electron process.
+All extra arguments are passed through to the electron process, with or
+without the `--` separator.
 
 ```shell
-electron-tsdown dev -- --remote-debugging-port
+electron-tsdown dev --remote-debugging-port=9229
+electron-tsdown dev -- --remote-debugging-port=9229
+npm run dev -- --remote-debugging-port=9229
 ```
+
+Arguments are forwarded verbatim, and electron only reads a switch value
+written with `=`. Written with a space, `--remote-debugging-port 9229` is read
+as the switch with no value — electron picks a free port — followed by an
+unrelated argument.
 
 - `--remote-debugging-port=9229` will start the devtools to the port 9229
 - `--remote-debugging-port` will start the devtools to a free port
