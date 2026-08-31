@@ -74,8 +74,8 @@ Templates are shipped as-is in the published tarball (`files: ["dist", "template
 - **Lint:** oxlint (`oxlint.config.ts` at the root; templates are ignored)
 - **Format:** oxfmt (`oxfmt.config.ts` at the root, re-exported by each package; 80 cols, single quotes, no semis, trailing commas). `CHANGELOG.md` is ignored — oxfmt otherwise rewrites the changesets-generated files.
 - **Git hooks:** lefthook (`lefthook.yml`), formats and lints staged files per package
-- **Node:** `electron-tsdown` requires `^22.18.0 || >=24.11.0` (tsdown 0.22's floor); pinned to 24 via Volta and CI
-- **pnpm:** v10
+- **Node:** `electron-tsdown` requires `^22.18.0 || >=24.11.0` (tsdown 0.22's floor); pinned to 24 via `.nvmrc` and CI
+- **pnpm:** v12, pinned by the root `packageManager` field
 - **CI:** `.github/workflows/ci.yaml` on every PR — lint, format, build, plus a job per template that scaffolds it against a packed `electron-tsdown` tarball and runs `typecheck` + `build`. `scripts/` is covered by neither oxlint nor oxfmt (both only run through `pnpm -r`).
 
 ## Release
