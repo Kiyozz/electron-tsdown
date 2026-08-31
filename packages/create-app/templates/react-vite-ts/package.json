@@ -17,7 +17,7 @@
     "@vitejs/plugin-react": "^6.1.1",
     "electron": "^44.0.0",
     "electron-builder": "^26.15.7",
-    "electron-tsdown": "^12.0.1",
+    "electron-tsdown": "^12.0.2",
     "electron-util": "^1.0.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",

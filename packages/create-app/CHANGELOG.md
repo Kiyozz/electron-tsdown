@@ -1,3 +1,9 @@
+## 12.0.2
+
+### Patch Changes
+
+- 4a9766b: Fix unbundle in templates. It was set to true instead of false, which caused that no dependencies were bundled.
+
 ## 12.0.1
 
 ### Patch Changes

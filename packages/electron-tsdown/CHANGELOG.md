@@ -1,3 +1,9 @@
+## 12.0.2
+
+### Patch Changes
+
+- 4a9766b: Fix neverBundle to ignore electron and node only, not all dependencies.
+
 ## 12.0.1
 
 ### Patch Changes
