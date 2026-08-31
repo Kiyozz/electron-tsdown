@@ -1,3 +1,13 @@
+## 12.0.1
+
+### Patch Changes
+
+- acb2ac5: Drop the `engines.pnpm` constraint. It pinned consumers to pnpm 10 for no
+  reason.
+- acb2ac5: Add `pnpm-workspace.yaml` to the templates so `pnpm install` works on pnpm 12,
+  which fails the install when a dependency's build script is neither allowed nor
+  ignored.
+
 ## 12.0.0
 
 ### Minor Changes

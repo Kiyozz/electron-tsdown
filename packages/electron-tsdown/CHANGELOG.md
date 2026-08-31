@@ -1,3 +1,13 @@
+## 12.0.1
+
+### Patch Changes
+
+- 3616a30: Forward extra `dev` arguments to the electron process again. Both
+  `electron-tsdown dev -- --remote-debugging-port=9222` and
+  `electron-tsdown dev --remote-debugging-port=9222` now work.
+- acb2ac5: Drop the `engines.pnpm` constraint. It pinned consumers to pnpm 10 for no
+  reason.
+
 ## 12.0.0
 
 ### Major Changes
