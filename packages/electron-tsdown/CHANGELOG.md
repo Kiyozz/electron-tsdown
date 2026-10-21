@@ -1,3 +1,9 @@
+## 12.0.3
+
+### Patch Changes
+
+- 69e5f35: Bump dependencies to pick up security advisories: `pino-pretty` 13.2.0 (fast-copy stack exhaustion), plus `vite`, `postcss`, `nanoid`, `source-map-js` and `js-yaml` fixes in the dev toolchain.
+
 ## 12.0.2
 
 ### Patch Changes
