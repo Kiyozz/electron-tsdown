@@ -20,7 +20,7 @@
     "lint": "pnpm -r lint",
     "lint:fix": "pnpm -r lint:fix",
     "changeset:version": "changeset version && node scripts/sync-template-deps.mjs",
-    "changeset:publish": "pnpm -r build && changeset publish --provenance"
+    "changeset:publish": "pnpm -r build && changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "^3.0.3",

@@ -27,7 +27,8 @@
   "type": "module",
   "exports": "./dist/index.js",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true
   },
   "scripts": {
     "build": "tsc -b && tsdown",
