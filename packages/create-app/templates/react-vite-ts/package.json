@@ -11,19 +11,19 @@
     "package": "electron-builder"
   },
   "devDependencies": {
-    "@types/node": "^24.13.3",
-    "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.5",
-    "@vitejs/plugin-react": "^6.1.1",
-    "electron": "^44.0.0",
-    "electron-builder": "^26.15.7",
+    "@types/node": "^24.19.4",
+    "@types/react": "^19.3.3",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.3.0",
+    "electron": "^45.5.0",
+    "electron-builder": "^26.18.0",
     "electron-tsdown": "^12.0.2",
     "electron-util": "^1.0.0",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8",
-    "tsdown": "^0.22.14",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "tsdown": "^0.23.7",
     "typescript": "~7.0.2",
-    "vite": "^8.2.2"
+    "vite": "^8.3.8"
   },
   "build": {
     "appId": "io.comp.myapp",
