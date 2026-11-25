@@ -32,11 +32,11 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - uses: changesets/action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # v2 is the line that supports @changesets/cli v3 (v1 targets cli v2).
+      # It reads the token from `github-token`, which defaults to GITHUB_TOKEN.
+      - uses: changesets/action@v2
         with:
-          publish: pnpm changeset:publish
-          version: pnpm changeset:version
-          commit: 'chore(release): update version for release'
-          title: 'chore(release): update version for release'
+          publish-script: pnpm changeset:publish
+          version-script: pnpm changeset:version
+          commit-message: 'chore(release): update version for release'
+          pr-title: 'chore(release): update version for release'

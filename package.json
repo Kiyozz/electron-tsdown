@@ -20,13 +20,13 @@
     "lint": "pnpm -r lint",
     "lint:fix": "pnpm -r lint:fix",
     "changeset:version": "changeset version && node scripts/sync-template-deps.mjs",
-    "changeset:publish": "pnpm -r build && changeset publish --provenance"
+    "changeset:publish": "pnpm -r build && changeset publish"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.31.1",
+    "@changesets/cli": "^3.0.3",
     "lefthook": "^2.2.2",
-    "oxfmt": "^0.74.0",
-    "oxlint": "^1.89.0",
+    "oxfmt": "^0.80.0",
+    "oxlint": "^1.95.0",
     "typescript": "~7.0.2"
   },
   "packageManager": "pnpm@12.1.0"
