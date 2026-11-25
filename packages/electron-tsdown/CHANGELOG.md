@@ -1,3 +1,17 @@
+## 13.0.0
+
+### Major Changes
+
+- c34c860: Require tsdown 0.23. The `tsdown` peer dependency moves from `^0.22.0` to `^0.23.0`, and Node 25 is no longer supported (tsdown 0.23 accepts `^22.18.0 || ^24.11.0 || >=26.0.0`).
+  
+  Migration: in your app, bump `tsdown` to `^0.23.7` alongside `electron-tsdown`. No `electron-tsdown.config` or `tsdown.config` change is needed.
+  
+  The templates now scaffold Electron 45, React 19.3, Vite 8.3, `@vitejs/plugin-react` 6.3 and electron-builder 26.18.
+
+### Patch Changes
+
+- 69e5f35: Bump dependencies to pick up security advisories: `pino-pretty` 13.2.0 (fast-copy stack exhaustion), plus `vite`, `postcss`, `nanoid`, `source-map-js` and `js-yaml` fixes in the dev toolchain.
+
 ## 12.0.2
 
 ### Patch Changes
